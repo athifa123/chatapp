@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom";
+
 const Login = () =>{
+    const navigate = useNavigate();
     return (
         <div className="startchat">
-            <button > Start Chatting </button>
+            <button onClick= { () => navigate('/chat') }> Start Chatting </button>
         </div>
     )
     

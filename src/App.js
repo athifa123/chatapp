@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from "react-dom/client";
 import Login from './components/Login';
 import Joinchat from './components/Joinchat';
+import Page from './components/Page';
 import { Outlet, RouterProvider , createBrowserRouter} from "react-router-dom";
 
 function App() {
@@ -21,18 +22,18 @@ const appRouter = createBrowserRouter([
     Element : <App/>,
     children : [
       {
-              path: '/',
-              element : <Joinchat/>,
-      },
-      {
-              path :'/login',
+              path :'/',
               element: <Login/>,
       },
+      {
+        path :'/chat',
+        element: <Page/>,
+      },
+
     ],
     //errorElement: <Error/>,
 
   }
 ])
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider  router = {App}/>)
+export default appRouter;
