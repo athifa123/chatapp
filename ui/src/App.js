@@ -3,7 +3,7 @@ import Login from './components/Login';
 import Page from './components/Page';
 import { Outlet, RouterProvider , createBrowserRouter} from "react-router-dom";
 import { socket } from './socket';
-import  socketobj  from './socket';
+//import  socketobj  from './socket';
 
 function App() {
   return (
@@ -25,7 +25,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path :'/chat',
-        element: <Page/>,
+        element: <Page socket={socket}/>,
       },
 
     ],
