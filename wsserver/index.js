@@ -6,7 +6,7 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server , {
     cors: {
-      origin: "http://localhost:3001"
+      origin: "http://localhost:3005"
     }
   });
 
@@ -19,7 +19,7 @@ io.on('connection', (clientSocket) => {
         })
         clientSocket.on("message", (data) =>{
             console.log("userdata", data)
-            clientSocket.broadcast.emit('message', data);
+            clientSocket.broadcast.emit('response', data);
         })
 
 
