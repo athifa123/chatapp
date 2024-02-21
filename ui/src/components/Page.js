@@ -90,7 +90,6 @@ var mock_data = [
 
 
 const Page = ({ socket }) => {
-    const [isConnected, setIsConnected] = useState(socket.connected)
     const [listOfMessage, setListOfMessage] = useState([]);
 
     function onSend(msg) {
@@ -107,29 +106,13 @@ const Page = ({ socket }) => {
 
     }
 
-    useEffect(() => {
-        function onConnect() {
-            setIsConnected(true)
-        }
-        function onDisconnect() {
-            setIsConnected(false)
-        }
-        function onResponse(data) {
-            let messages = Array.from(listOfMessage)
-            messages.push(data);
-            setListOfMessage(messages);
-        }
+    function onResponse(data) {
+        let messages = Array.from(listOfMessage)
+        messages.push(data);
+        setListOfMessage(messages);
+    }
+    socket.on('response', onResponse);
 
-        socket.on('connect', onConnect);
-        socket.on('disconnect', onDisconnect);
-        socket.on('response', onResponse);
-        return ()=>{
-            socket.off('connect', onConnect);
-            socket.off('disconnect', onDisconnect);
-            socket.off('response', onResponse);
-
-        }
-    }, []);
 
     return (
         <div style={{ "background": "#eed3ac" }}>
