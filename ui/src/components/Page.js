@@ -1,93 +1,7 @@
 import { useEffect, useState } from "react";
 import Inputbox from "./Inputbox";
 
-var id = crypto.randomUUID();
-var mock_data = [
-    {
-        "by": "me",
-        "message": "hello",
-    },
-    {
-        "by": "you",
-        "message": "hello",
-    },
-    {
-        "by": "me",
-        "message": "hey",
-    },
-    {
-        "by": "you",
-        "message": "bye",
-    },
-    {
-        "by": "me",
-        "message": "hello",
-    },
-    {
-        "by": "you",
-        "message": "hello",
-    },
-    {
-        "by": "me",
-        "message": "hey",
-    },
-    {
-        "by": "you",
-        "message": "bye",
-    },
-    {
-        "by": "me",
-        "message": "hello",
-    },
-    {
-        "by": "you",
-        "message": "hello",
-    },
-    {
-        "by": "me",
-        "message": "hey",
-    },
-    {
-        "by": "you",
-        "message": "bye",
-    },
-    {
-        "by": "me",
-        "message": "hello",
-    },
-    {
-        "by": "you",
-        "message": "hello",
-    },
-    {
-        "by": "me",
-        "message": "hey",
-    },
-    {
-        "by": "you",
-        "message": "bye",
-    },
-    {
-        "by": "me",
-        "message": "hello",
-    },
-    {
-        "by": "you",
-        "message": "hello",
-    },
-    {
-        "by": "me",
-        "message": "hey",
-    },
-    {
-        "by": "you",
-        "message": "bye",
-    },
-
-
-]
-
-
+//var id = crypto.randomUUID();
 
 const Page = ({ socket }) => {
     const [listOfMessage, setListOfMessage] = useState([]);
@@ -95,7 +9,7 @@ const Page = ({ socket }) => {
     function onSend(msg) {
         var payload = {
             message: msg,
-            by: id,
+            by: localStorage.getItem('username'),
             date: new Date(),
 
         }
@@ -142,31 +56,46 @@ function MessageContainer({ items }) {
     const [itemstate, setItemstate] = useState([]);
     return (
         <div style={{ "height": "100%" }}> {items.map((data) => {
-            return (data.by === id ? < SentMessage text={data.message} > </SentMessage> : <ReceivedMessage text={data.message} />)
+            return (data.by === localStorage.getItem('username') ? < SentMessage text={data.message} by={data.by} date={data.date.toDateString()}> </SentMessage> 
+            : <ReceivedMessage text={data.message} by={data.by} date={data.date} />)
         })}</div>
     )
 }
 
-function SentMessage({ text }) {
+function SentMessage({ by, date, text }) {
     return (
-        <div style={{ "padding": "10px", "border-radius": "5px", "display": "flex", "flexDirection": "row-reverse" }}>  <div style={{
-            "background": "aquamarine",
-            "padding": "7px",
-            "border-radius": "5px",
-            "font-size": "xx-small"
-        }}> {text}  </div> </div>
+        <div style={{ "padding": "10px", "border-radius": "5px", "display": "flex", "flexDirection": "row-reverse" }}>
+            <div style={{ "display": "flex", "flexDirection": "column" }}>
+                <div> {by}</div>
+                <div style={{
+                    "background": "aquamarine",
+                    "padding": "7px",
+                    "border-radius": "5px",
+                    "font-size": "xx-small"
+                }}> {text}
+                </div>
+                <div> {date} </div>
+            </div>
+        </div>
+
     )
 
 }
 
-function ReceivedMessage({ text }) {
+function ReceivedMessage({ by,date,text }) {
     return (
-        <div style={{ "padding": "10px", "border-radius": "5px", "display": "flex" }}>  <div style={{
-            "background": "azure",
-            "padding": "7px",
-            "border-radius": "5px",
-            "font-size": "xx-small"
-        }}> {text}  </div> </div>
+        <div style={{ "padding": "10px", "border-radius": "5px", "display": "flex" }}>  <div style={{ "display": "flex", "flexDirection": "column" }}>
+            <div> {by}</div>
+            <div style={{
+                "background": "aquamarine",
+                "padding": "7px",
+                "border-radius": "5px",
+                "font-size": "xx-small"
+            }}> {text}
+            </div>
+            <div> {date} </div>
+        </div>
+        </div>
     )
 
 }
