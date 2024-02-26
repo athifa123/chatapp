@@ -4,7 +4,8 @@ import Page from './components/Page';
 import { useEffect, useState } from "react";
 import { Outlet, RouterProvider , createBrowserRouter} from "react-router-dom";
 import { socket } from './socket';
-//import  socketobj  from './socket';
+import backgroundImage from './chatappbackgroudimage.jpeg';
+//import  socketobj   from './socket';
 
 function App({socket}) {
   const [isConnected, setIsConnected] = useState(socket.connected)
@@ -27,8 +28,8 @@ function App({socket}) {
 }, []);
   return (
     
-    <div className="App">
-      <Outlet/>
+    <div className="App" style={{ 'background': "teal" }} >
+      <Outlet />
     
     </div>
   );
