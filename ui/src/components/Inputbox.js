@@ -6,30 +6,19 @@ const Inputbox = ({onSend}) => {
         <div className="initiatechat" style={{
             "display": "flex",
             "flex-direction": "row",
-            "width": "100%",
             "flex-wrap": "nowrap",
             "align-content": "center",
             "align-items": "stretch",
             "justify-content": " center",
-            "position": "fixed", "bottom": "0"
+            "position": "fixed", "bottom": "0", "margin":"9px",
+            "width": "-webkit-fill-available", "gap":"5px"
         }}> 
             <input value ={message} onChange={(e)=>{
                 setMessage(e.target.value)
-            }} style={{
-                'width': '100%', "height"
-                    : "20%",
-                'padding': '10px',
-                'border': '1px solid purple',
-                'border-radius': '10px',
-                'background': "pink"
             }} />
-            <button  onClick = {()=>{
+            <button style={{ "height": "55px", "padding": "10px 10px"}} onClick = {()=>{
                 onSend(message);
                 setMessage("");
-            }} style={{
-                "background ": "green", 'padding': '10px',
-                'border': '1px solid red',
-                'border-radius': '10px',
             }}> Send </button>
 
         </div>

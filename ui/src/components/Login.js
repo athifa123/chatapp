@@ -5,8 +5,20 @@ import { useState } from "react";
 
 const Login = () =>{
     const [userName, setUserName] = useState(localStorage.getItem('username'));
-    const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+    const [isButtonEnabled, setIsButtonEnabled] = useState(()=> { return localStorage.getItem('username') && localStorage.getItem('username').length>0});
     const navigate = useNavigate();
+
+    function validate(value){
+        if (value.length >= 1) 
+        {
+            setIsButtonEnabled(true);
+        }
+        else {
+            setIsButtonEnabled(false);
+        } 
+
+    }
+
 
     function onStartChat(){
         localStorage.setItem('username', userName);
@@ -14,17 +26,11 @@ const Login = () =>{
     }
     function onInputChange(e){
         let value = e.target.value;
-        if (value.length >= 1) 
-        {
-            setIsButtonEnabled(true);
-        }
-        else {
-            setIsButtonEnabled(false);
-        }
+        validate(value);
         setUserName(value);
-
     }
 
+   
 
     return (
         <div className="container">

@@ -10,7 +10,7 @@ const Page = ({ socket }) => {
         var payload = {
             message: msg,
             by: localStorage.getItem('username'),
-            date: new Date(),
+            date: new Date().toGMTString(),
 
         }
         socket.emit('message', payload);
@@ -29,7 +29,7 @@ const Page = ({ socket }) => {
 
 
     return (
-        <div style={{ "background": "#eed3ac" }}>
+        <div style={{}}>
 
             <VerticalLayout>
                 <Inputbox onSend={onSend} />
@@ -56,8 +56,8 @@ function MessageContainer({ items }) {
     const [itemstate, setItemstate] = useState([]);
     return (
         <div style={{ "height": "100%" }}> {items.map((data) => {
-            return (data.by === localStorage.getItem('username') ? < SentMessage text={data.message} by={data.by} date={data.date.toDateString()}> </SentMessage> 
-            : <ReceivedMessage text={data.message} by={data.by} date={data.date} />)
+            return (data.by === localStorage.getItem('username') ? < SentMessage text={data.message} by={data.by} date={data.date}> </SentMessage>
+                : <ReceivedMessage text={data.message} by={data.by} date={data.date} />)
         })}</div>
     )
 }
@@ -65,16 +65,15 @@ function MessageContainer({ items }) {
 function SentMessage({ by, date, text }) {
     return (
         <div style={{ "padding": "10px", "border-radius": "5px", "display": "flex", "flexDirection": "row-reverse" }}>
-            <div style={{ "display": "flex", "flexDirection": "column" }}>
-                <div> {by}</div>
+            <div style={{ "display": "flex", "flexDirection": "column", "background": "#7FC7D9", "border-radius": "5px", "border": "1px solid #8f8282", "padding": "7px" }}>
+                
+                <div style={{"fontSize":"xx-small", "opacity" :"40%"}}> {by}</div>
                 <div style={{
-                    "background": "aquamarine",
-                    "padding": "7px",
                     "border-radius": "5px",
-                    "font-size": "xx-small"
+                    "font-size": "medium", "padding-bottom": "5px"
                 }}> {text}
                 </div>
-                <div> {date} </div>
+                <div style={{"fontSize":"xx-small", "opacity" :"40%" , "text-align": "end"}}> {new Date(date).toLocaleTimeString()} </div>
             </div>
         </div>
 
@@ -82,18 +81,17 @@ function SentMessage({ by, date, text }) {
 
 }
 
-function ReceivedMessage({ by,date,text }) {
+function ReceivedMessage({ by, date, text }) {
     return (
-        <div style={{ "padding": "10px", "border-radius": "5px", "display": "flex" }}>  <div style={{ "display": "flex", "flexDirection": "column" }}>
-            <div> {by}</div>
+        <div style={{ "padding": "10px", "border-radius": "5px", "display": "flex", }}> 
+         <div style={{ "display": "flex", "flexDirection": "column", "background":"#92C7CF", "border-radius": "5px", "border": "1px solid #8f8282", "padding": "7px" }}>
+            <div style={{"fontSize":"xx-small", "opacity" :"40%"}}> {by}</div>
             <div style={{
-                "background": "aquamarine",
-                "padding": "7px",
                 "border-radius": "5px",
-                "font-size": "xx-small"
+                "font-size": "medium", "padding-bottom": "5px"
             }}> {text}
             </div>
-            <div> {date} </div>
+            <div style={{"fontSize":"xx-small", "opacity" :"40%","text-align": "end" }}> {new Date(date).toLocaleTimeString()} </div>
         </div>
         </div>
     )
