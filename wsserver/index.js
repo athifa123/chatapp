@@ -28,3 +28,5 @@ io.on('connection', (clientSocket) => {
 server.listen(8080, () => {
     console.log('listening on *:8080');
 });
+
+module.exports = app;
