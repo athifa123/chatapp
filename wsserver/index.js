@@ -5,12 +5,12 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 
-const io = new Server(server ) ;// ,{
-   // cors: {
-    //  origin: "http://localhost:3000"
-    //}
- // }
-
+const io = new Server(server  ,{
+    cors: {
+      origin: "https://chat-ui-opal-two.vercel.app"
+    }
+ }
+)
 
 
  io.of('/wss-chat').on('connection', (clientSocket) => {
