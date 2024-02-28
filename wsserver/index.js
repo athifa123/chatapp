@@ -4,11 +4,13 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server , {
-    cors: {
-      origin: "http://localhost:3000"
-    }
-  });
+
+const io = new Server(server ) ;// ,{
+   // cors: {
+    //  origin: "http://localhost:3000"
+    //}
+ // }
+
 
 io.on('connection', (clientSocket) => {
     console.log(' user connected');
@@ -24,7 +26,9 @@ io.on('connection', (clientSocket) => {
 
 
 });
-
+app.get('/',(request, response) => {
+    response.send('express js on vercel')
+})
 server.listen(8080, () => {
     console.log('listening on *:8080');
 });
