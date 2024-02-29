@@ -13,7 +13,7 @@ const io = new Server(server  ,{
 )
 
 
- io.of('/wss-chat').on('connection', (clientSocket) => {
+ io.on('connection', (clientSocket) => {
     console.log(' user connected');
     clientSocket.on('disconnect',
         () => {
