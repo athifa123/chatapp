@@ -3,7 +3,7 @@ import Login from './components/Login';
 import Page from './components/Page';
 import { useEffect, useState } from "react";
 import { Outlet, RouterProvider , createBrowserRouter} from "react-router-dom";
-import { socket } from './socket';
+import socket from './socket';
 import backgroundImage from './chatappbackgroudimage.jpeg';
 //import  socketobj   from './socket';
 

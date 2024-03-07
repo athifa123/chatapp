@@ -3,7 +3,7 @@ import { io } from 'socket.io-client';
 // "undefined" means the URL will be computed from the `window.location` object
 const URL = process.env.NODE_ENV === 'production' ? process.env.WEBSOCKET_URL : 'http://localhost:8080';
 
-const socket = io('wss://chatapp-nu-ebon.vercel.app');
+const socket = io(URL.replace('https', 'cdwss'));
 
 socket.on("connect_error", (err) => {
     // the reason of the error, for example "xhr poll error"
