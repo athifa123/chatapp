@@ -16,4 +16,4 @@ socket.on("connect_error", (err) => {
     console.log(err.context);
   });
 
-  export socket;
+  export default socket;
